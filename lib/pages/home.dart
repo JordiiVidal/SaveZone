@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget{
         floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
-        onPressed: () {},
+        onPressed: () => Navigator.pushReplacementNamed(context, '/create'),
       ),
         //bottomNavigationBar: TabBar(tabs: <Widget>[Tab(text: 'sdad',),Tab(text: 'sas',)],),
       ),
