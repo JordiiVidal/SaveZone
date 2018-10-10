@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../account_manager.dart';
+import 'account_create.dart';
 
 class HomePage extends StatelessWidget{
 
@@ -42,7 +43,9 @@ class HomePage extends StatelessWidget{
         floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
-        onPressed: () => Navigator.pushReplacementNamed(context, '/create'),
+        onPressed: (){
+          Navigator.pushNamed(context, '/account');
+        }
       ),
         //bottomNavigationBar: TabBar(tabs: <Widget>[Tab(text: 'sdad',),Tab(text: 'sas',)],),
       ),

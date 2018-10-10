@@ -26,12 +26,14 @@ class _MyAppState extends State<MyApp>{
         ),
         routes: {
           '/': (BuildContext context) => HomePage(),
-          '/create':(BuildContext context) => AccountCreatePage(),
         },onGenerateRoute: (RouteSettings settings){
           final List<String> pathElements = settings.name.split('/');
           if (pathElements[0] != '') {
           return null; //invalid name por lo tanto no va hacer load de una nueva page
-        }
+          }
+          if (pathElements[1] == 'account') {
+            return MaterialPageRoute(builder : (BuildContext context) => AccountCreatePage());
+          }
         },onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute(builder: (BuildContext context) => HomePage());
       },

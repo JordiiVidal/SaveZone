@@ -6,12 +6,7 @@ class AccountCreatePage extends StatelessWidget{
   @override
     Widget build(BuildContext context) {
       // TODO: implement build
-      return WillPopScope(
-        onWillPop: (){
-          Navigator.pop(context,false);
-          return Future.value(false);
-        },
-        child: Scaffold(
+      return Scaffold(
           appBar: AppBar(
             title: Text('Create Account'),
           ),
@@ -32,7 +27,6 @@ class AccountCreatePage extends StatelessWidget{
               ],
             ),
           ),
-        ),
-      );
+        );
     }
 }
