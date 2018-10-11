@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import '../account_manager.dart';
-import 'account_create.dart';
 
 class HomePage extends StatelessWidget{
+  final List<Map<String,dynamic>> accounts;
+
+  HomePage(this.accounts);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +38,8 @@ class HomePage extends StatelessWidget{
         ),
         body: TabBarView(
           children: <Widget>[
-            AccountManger(),
-            AccountManger(),
+            AccountManger(accounts),
+            AccountManger(accounts),
           ],
         ),
         floatingActionButton: FloatingActionButton(

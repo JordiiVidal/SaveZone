@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'accounts.dart';
 
 class AccountManger extends StatelessWidget{
+  final List<Map<String,dynamic>> accounts;
+  AccountManger(this.accounts);
 
   @override
     Widget build(BuildContext context) {
@@ -9,7 +11,7 @@ class AccountManger extends StatelessWidget{
       return Column(
         children: <Widget>[
           Expanded(
-            child: Accounts(),
+            child: Accounts(accounts),
           )
         ],
       );

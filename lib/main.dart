@@ -13,6 +13,21 @@ class MyApp extends StatefulWidget {
 }
 class _MyAppState extends State<MyApp>{
 
+  List<Map<String,dynamic>> _accounts = [];
+
+  void _addAccount(Map<String, dynamic> account){
+    setState(() {
+          _accounts.add(account);
+          print(_accounts);
+        });
+  }
+  void _deleteAccount(int index){
+    setState(() {
+          _accounts.removeAt(index);
+          print(_accounts);
+        });
+  }
+
   @override
     Widget build(BuildContext context) {
       // TODO: implement build
@@ -25,17 +40,17 @@ class _MyAppState extends State<MyApp>{
           backgroundColor: Colors.white,
         ),
         routes: {
-          '/': (BuildContext context) => HomePage(),
+          '/': (BuildContext context) => HomePage(_accounts),
         },onGenerateRoute: (RouteSettings settings){
           final List<String> pathElements = settings.name.split('/');
           if (pathElements[0] != '') {
           return null; //invalid name por lo tanto no va hacer load de una nueva page
           }
           if (pathElements[1] == 'account') {
-            return MaterialPageRoute(builder : (BuildContext context) => AccountCreatePage());
+            return MaterialPageRoute(builder : (BuildContext context) => AccountCreatePage(_addAccount));
           }
         },onUnknownRoute: (RouteSettings settings) {
-        return MaterialPageRoute(builder: (BuildContext context) => HomePage());
+        return MaterialPageRoute(builder: (BuildContext context) => HomePage(_accounts));
       },
       );
     }

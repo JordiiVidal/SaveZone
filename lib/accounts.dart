@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 
 class Accounts extends StatelessWidget{
 
-  final Map<String,dynamic> _account = {
-    'account':'Gmail',
-    'user':'jordi',
-    'email':'jordividal@gmail.com',
-    'pswd':'12132',
-    'icon':Icons.email
-  };
-  final List<Map<String,dynamic>>_accounts = [];
+  final List<Map<String,dynamic>>_accounts;
+
+  Accounts(this._accounts);
 
   Widget _buildAccountItem(BuildContext context, int index){
     return Card(
@@ -25,10 +20,7 @@ class Accounts extends StatelessWidget{
       ),
     );
   }
-  Accounts(){
-    this._accounts.add(this._account);
-  }
-
+  
   Widget _buildAccountList(){
 
     Widget accountCard = ListView.builder(
