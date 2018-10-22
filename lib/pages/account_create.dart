@@ -58,7 +58,7 @@ class _AccountCreatePage extends State<AccountCreatePage>{
                       'icon' : Icons.email
                     };
                     widget.addAccount(account);
-                    Navigator.pushReplacementNamed(context, '/');
+                    Navigator.pop(context);
                   },
                 ),
               ],
