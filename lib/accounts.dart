@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'models/account.dart';
 
 class Accounts extends StatelessWidget{
 
-  final List<Map<String,dynamic>>_accounts;
+  final List<Account>_accounts;
 
   Accounts(this._accounts);
 
@@ -12,9 +13,9 @@ class Accounts extends StatelessWidget{
       child: Column(
         children: <Widget>[
           ListTile(
-            leading: Icon(_accounts[index]['icon']),
-            title: Text(_accounts[index]['account']),
-            subtitle: Text(_accounts[index]['email']),
+            //leading: Icon(_accounts[index]['icon']),
+            title: Text(_accounts[index].name),
+            subtitle: Text(_accounts[index].email),
           )
         ],
       ),

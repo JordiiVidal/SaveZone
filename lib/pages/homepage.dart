@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../account_manager.dart';
+import '../models/account.dart';
 
 class HomePage extends StatelessWidget{
-  final List<Map<String,dynamic>> accounts;
+  final List<Account> accounts;
 
   HomePage(this.accounts);
 
@@ -14,6 +15,8 @@ class HomePage extends StatelessWidget{
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.blue,
+          textTheme: TextTheme(title: TextStyle(color: Colors.white, fontSize: 20.0)),
           title: Text('SaveZone'),
           centerTitle: true,
           actions: <Widget>[
@@ -24,6 +27,9 @@ class HomePage extends StatelessWidget{
             )
           ],
           bottom: TabBar(
+            indicatorColor: Colors.red,
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.black,
             tabs: <Widget>[
               Tab(
                 icon: Icon(Icons.new_releases),

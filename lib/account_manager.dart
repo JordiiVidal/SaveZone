@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'accounts.dart';
+import 'models/account.dart';
 
 class AccountManger extends StatelessWidget{
-  final List<Map<String,dynamic>> accounts;
+  final List<Account> accounts;
   AccountManger(this.accounts);
 
   @override

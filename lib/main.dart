@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'pages/home.dart';
+import 'pages/homepage.dart';
 import 'pages/account_create.dart';
+import 'models/account.dart';
 
 void main() => runApp(new MyApp());
 
@@ -13,9 +14,9 @@ class MyApp extends StatefulWidget {
 }
 class _MyAppState extends State<MyApp>{
 
-  List<Map<String,dynamic>> _accounts = [];
+  List<Account> _accounts = [];
 
-  void _addAccount(Map<String, dynamic> account){
+  void _addAccount(Account account){
     setState(() {
           _accounts.add(account);
           print(_accounts);
@@ -36,7 +37,7 @@ class _MyAppState extends State<MyApp>{
         theme: ThemeData(
           brightness: Brightness.light,
           primaryColor: Colors.lightBlueAccent,
-          accentColor: Colors.lime,
+          accentColor: Colors.blue,
           backgroundColor: Colors.white,
         ),
         routes: {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../models/account.dart';
 
 
 class AccountCreatePage extends StatefulWidget{
+
   final Function addAccount;
 
   AccountCreatePage(this.addAccount);
@@ -15,6 +17,7 @@ class AccountCreatePage extends StatefulWidget{
 class _AccountCreatePage extends State<AccountCreatePage>{
   String _accountValue;
   String _emailValue;
+  String _passwordValue;
 
   @override
     Widget build(BuildContext context) {
@@ -45,6 +48,15 @@ class _AccountCreatePage extends State<AccountCreatePage>{
                     });
                   },
                 ),
+                TextField(
+                  maxLines: 3,
+                  decoration: InputDecoration(labelText: 'Password'),
+                  onChanged: (String value){
+                    setState(() {
+                      _passwordValue = value;       
+                    });
+                  },
+                ),
                 SizedBox(
                   height: 10.0,
                 ),
@@ -52,11 +64,7 @@ class _AccountCreatePage extends State<AccountCreatePage>{
                   child: Text('SAVE'),
                   color: Theme.of(context).accentColor,
                   onPressed: (){
-                    final Map<String, dynamic> account = {
-                      'account': _accountValue,
-                      'email': _emailValue,
-                      'icon' : Icons.email
-                    };
+                    final Account account = new Account(id: 1,name: _accountValue, email: _emailValue, password: _passwordValue);
                     widget.addAccount(account);
                     Navigator.pop(context);
                   },
