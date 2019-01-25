@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import '../account_manager.dart';
+import '../category_manager.dart';
 import '../models/account.dart';
+import '../models/category.dart';
 
 class HomePage extends StatelessWidget{
   final List<Account> accounts;
+  final List<Category> categories;
 
-  HomePage(this.accounts);
+  HomePage(this.accounts,this.categories);
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +30,15 @@ class HomePage extends StatelessWidget{
             )
           ],
           bottom: TabBar(
-            indicatorColor: Colors.red,
+            indicatorColor: Colors.white,
             labelColor: Colors.white,
             unselectedLabelColor: Colors.black,
             tabs: <Widget>[
               Tab(
-                icon: Icon(Icons.new_releases),
-                text: 'My Accounts',
+                text: 'ACCOUNTS',
               ),
               Tab(
-                icon: Icon(Icons.list),
-                text: 'Categories',
+                text: 'CATEGORIES',
               )
             ],
           ),
@@ -45,7 +46,7 @@ class HomePage extends StatelessWidget{
         body: TabBarView(
           children: <Widget>[
             AccountManger(accounts),
-            AccountManger(accounts),
+            CategoryManger(categories),
           ],
         ),
         floatingActionButton: FloatingActionButton(

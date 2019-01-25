@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/homepage.dart';
 import 'pages/account_create.dart';
 import 'models/account.dart';
+import 'models/category.dart';
 
 void main() => runApp(new MyApp());
 
@@ -15,6 +16,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp>{
 
   List<Account> _accounts = [];
+  List<Category> _categories = [];
 
   void _addAccount(Account account){
     setState(() {
@@ -41,7 +43,7 @@ class _MyAppState extends State<MyApp>{
           backgroundColor: Colors.white,
         ),
         routes: {
-          '/': (BuildContext context) => HomePage(_accounts),
+          '/': (BuildContext context) => HomePage(_accounts,_categories),
         },onGenerateRoute: (RouteSettings settings){
           final List<String> pathElements = settings.name.split('/');
           if (pathElements[0] != '') {
@@ -51,7 +53,7 @@ class _MyAppState extends State<MyApp>{
             return MaterialPageRoute(builder : (BuildContext context) => AccountCreatePage(_addAccount));
           }
         },onUnknownRoute: (RouteSettings settings) {
-        return MaterialPageRoute(builder: (BuildContext context) => HomePage(_accounts));
+        return MaterialPageRoute(builder: (BuildContext context) => HomePage(_accounts,_categories));
       },
       );
     }
