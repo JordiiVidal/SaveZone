@@ -15,16 +15,21 @@ class HomePage extends StatelessWidget{
     // TODO: implement build
     return DefaultTabController(
       //TAB TOP PAGE
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.blueAccent,
           textTheme: TextTheme(title: TextStyle(color: Colors.white, fontSize: 20.0)),
-          title: Text('SaveZone'),
-          centerTitle: true,
+          title: Text('SAFE ZONE',style: TextStyle(fontSize: 20.0,letterSpacing: 1.5)),
+          centerTitle: false,
           actions: <Widget>[
             IconButton(
               icon: new Icon(Icons.lock_outline),
+              tooltip: 'block mobile',
+              onPressed: (){},
+            ),
+            IconButton(
+              icon: new Icon(Icons.delete_forever),
               tooltip: 'block mobile',
               onPressed: (){},
             )
@@ -32,13 +37,15 @@ class HomePage extends StatelessWidget{
           bottom: TabBar(
             indicatorColor: Colors.white,
             labelColor: Colors.white,
-            unselectedLabelColor: Colors.black,
+            unselectedLabelColor: Colors.white70,
             tabs: <Widget>[
               Tab(
-                text: 'ACCOUNTS',
+                child: Text('ACCOUNTS',style: TextStyle(fontSize: 12.0,letterSpacing: 1.5)),
               ),
               Tab(
-                text: 'CATEGORIES',
+                child: Text('CATEGORIES',style: TextStyle(fontSize: 12.0,letterSpacing: 1.5)),
+              ),Tab(
+                child: Text('HELP',style: TextStyle(fontSize: 12.0,letterSpacing: 1.5)),
               )
             ],
           ),
@@ -47,6 +54,7 @@ class HomePage extends StatelessWidget{
           children: <Widget>[
             AccountManger(accounts),
             CategoryManger(categories),
+            AccountManger(accounts),
           ],
         ),
         floatingActionButton: FloatingActionButton(

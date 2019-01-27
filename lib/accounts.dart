@@ -7,23 +7,16 @@ class Accounts extends StatelessWidget {
   Accounts(this._accounts);
 
   Widget _buildAccountItem(BuildContext context, int index) {
-    return Card(
-      margin: EdgeInsets.all(15.0),
-      color: Colors.white,
-      shape: new BeveledRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        side: BorderSide(color: Colors.black12)
-      ),
-      child: Column(
+    return Column(
         children: <Widget>[
           ListTile(
               leading: Icon(Icons.storage),
               title: Text(_accounts[index].name),
               subtitle: Text(_accounts[index].email),
-              trailing: Text(_accounts[index].name[0]),
-              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0))
+              trailing: Text(_accounts[index].name[0].toUpperCase(),style: TextStyle(fontSize: 22.0,fontWeight: FontWeight.w300),),
+              ),
+              Divider(),
         ],
-      ),
     );
   }
 
