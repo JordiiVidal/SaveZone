@@ -1,8 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'pages/homepage.dart';
 import 'pages/account_create.dart';
 import 'models/account.dart';
-import 'models/category.dart';
 
 void main() => runApp(new MyApp());
 
@@ -16,14 +16,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp>{
 
   List<Account> _accounts = [];
-  List<Category> _categories = [];
   
-  var c = Category(name: 'Gmail',icon: Icons.message,colors: Colors.blue);
 
   void _addAccount(Account account){
     setState(() {
           _accounts.add(account);
-          _categories.add(c);
           print(_accounts);
         });
   }
@@ -38,15 +35,15 @@ class _MyAppState extends State<MyApp>{
     Widget build(BuildContext context) {
       // TODO: implement build
       return MaterialApp(
-        title: 'SaveZone',
+        title: 'SafeZone',
         theme: ThemeData(
           brightness: Brightness.light,
-          primaryColor: Colors.lightBlueAccent,
-          accentColor: Colors.blue,
+          primaryColor: defaultTargetPlatform == TargetPlatform.iOS ? Colors.grey[50] : Colors.blueAccent,
+          accentColor: defaultTargetPlatform == TargetPlatform.iOS ? Colors.grey[300] : Colors.blue,
           backgroundColor: Colors.white,
         ),
         routes: {
-          '/': (BuildContext context) => HomePage(_accounts,_categories),
+          '/': (BuildContext context) => HomePage(_accounts),
         },onGenerateRoute: (RouteSettings settings){
           final List<String> pathElements = settings.name.split('/');
           if (pathElements[0] != '') {
@@ -56,7 +53,7 @@ class _MyAppState extends State<MyApp>{
             return MaterialPageRoute(builder : (BuildContext context) => AccountCreatePage(_addAccount));
           }
         },onUnknownRoute: (RouteSettings settings) {
-        return MaterialPageRoute(builder: (BuildContext context) => HomePage(_accounts,_categories));
+        return MaterialPageRoute(builder: (BuildContext context) => HomePage(_accounts));
       },
       );
     }
