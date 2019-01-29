@@ -17,10 +17,13 @@ class _MyAppState extends State<MyApp>{
 
   List<Account> _accounts = [];
   List<Category> _categories = [];
+  
+  var c = Category(name: 'Gmail',icon: Icons.message,colors: Colors.blue);
 
   void _addAccount(Account account){
     setState(() {
           _accounts.add(account);
+          _categories.add(c);
           print(_accounts);
         });
   }
