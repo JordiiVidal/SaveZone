@@ -10,12 +10,9 @@ class   ServiceManger extends StatelessWidget{
   @override
     Widget build(BuildContext context) {
       // TODO: implement build
-      return Column(
-        children: <Widget>[
-          Expanded(
-            child: Services(services),
-          )
-        ],
+      return Container(
+        child: Services(services),
+        height: 300.0,
       );
     }
 }

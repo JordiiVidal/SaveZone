@@ -6,34 +6,31 @@ class Services extends StatelessWidget {
 
   Services(this._services);
 
-  Widget _buildCategoryCell(BuildContext context, int index) {
-    return Card(
-      child: GridTile(
-        header: Text(_services[index].name),
-        footer: Row(
-          children: <Widget>[
-            Icon(_services[index].icon)
-          ],
-        ),
-      )
+  Widget _buildServiceItem(BuildContext context, int index) {
+    return ListTile(
+      title: Text(
+        _services[index].name,
+        style: TextStyle(color: Colors.grey[600]),
+      ),
+      trailing: Icon(
+        _services[index].icon,
+        size: 19.0,
+      ),
     );
   }
 
-  Widget _builCategoriesGrid() {
-    Widget accountCard = GridView.builder(
-      itemBuilder: _buildCategoryCell,
+  Widget _builServicesList() {
+    Widget serviceCard = ListView.builder(
+      itemBuilder: _buildServiceItem,
       itemCount: _services.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: (2),
-      ),
     );
 
-    return accountCard;
+    return serviceCard;
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return _builCategoriesGrid();
+    return _builServicesList();
   }
 }

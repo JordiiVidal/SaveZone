@@ -1,12 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../account_manager.dart';
+import '../service_manager.dart';
 import '../models/account.dart';
+import '../models/service.dart';
 
 class HomePage extends StatelessWidget {
   final List<Account> accounts;
+  final List<Service> services;
 
-  HomePage(this.accounts);
+  HomePage(this.accounts, this.services);
 
   @override
   Widget build(BuildContext context) {
@@ -55,69 +58,13 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                height: 320.0,
-                child: ListView(
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(
-                        'Gmail',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                      trailing: Icon(
-                        Icons.email,
-                        size: 19.0,
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        'Facebook',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                      trailing: Icon(
-                        Icons.chat,
-                        size: 19.0,
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        'Amazon',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                      trailing: Icon(
-                        Icons.card_giftcard,
-                        size: 19.0,
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        'Epic Games',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                      trailing: Icon(
-                        Icons.videogame_asset,
-                        size: 19.0,
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        'OutLook',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                      trailing: Icon(
-                        Icons.email,
-                        size: 19.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              ServiceManger(services),
               Divider(),
               Container(
                 padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[Text('Cerrar'),CloseButton()],
+                  children: <Widget>[Text('Cerrar'), CloseButton()],
                 ),
               ),
             ],
