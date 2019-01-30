@@ -17,7 +17,6 @@ class _MyAppState extends State<MyApp>{
 
   List<Account> _accounts = [];
   
-
   void _addAccount(Account account){
     setState(() {
           _accounts.add(account);

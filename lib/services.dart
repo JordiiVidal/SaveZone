@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'models/category.dart';
+import 'models/service.dart';
 
-class Categories extends StatelessWidget {
-  final List<Category> _categories;
+class Services extends StatelessWidget {
+  final List<Service> _services;
 
-  Categories(this._categories);
+  Services(this._services);
 
   Widget _buildCategoryCell(BuildContext context, int index) {
     return Card(
       child: GridTile(
-        header: Text(_categories[index].name),
+        header: Text(_services[index].name),
         footer: Row(
           children: <Widget>[
-            Icon(_categories[index].icon)
+            Icon(_services[index].icon)
           ],
         ),
       )
@@ -22,7 +22,7 @@ class Categories extends StatelessWidget {
   Widget _builCategoriesGrid() {
     Widget accountCard = GridView.builder(
       itemBuilder: _buildCategoryCell,
-      itemCount: _categories.length,
+      itemCount: _services.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: (2),
       ),

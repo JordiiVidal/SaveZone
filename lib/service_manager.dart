@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'categories.dart';
-import 'models/category.dart';
+import 'services.dart';
+import 'models/service.dart';
 
-class   CategoryManger extends StatelessWidget{
+class   ServiceManger extends StatelessWidget{
 
-  final List<Category> categories;
-  CategoryManger(this.categories);
+  final List<Service> services;
+  ServiceManger(this.services);
 
   @override
     Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class   CategoryManger extends StatelessWidget{
       return Column(
         children: <Widget>[
           Expanded(
-            child: Categories(categories),
+            child: Services(services),
           )
         ],
       );
