@@ -11,6 +11,42 @@ class HomePage extends StatelessWidget {
 
   HomePage(this.accounts, this.services);
 
+  Widget _drawerBuild(){
+    return Drawer(
+          child: ListView(
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.white24,
+                  /*image: DecorationImage(
+                    image: ExactAssetImage('assets/lock.jpg'),
+                    fit: BoxFit.cover,
+                  ),*/
+                ),
+                accountName: Text('Jordi'),
+                accountEmail: Text('jordividal1997@gmail.com'),
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Text(
+                    'J',
+                    style: TextStyle(fontSize: 29.0),
+                  ),
+                ),
+              ),
+              ServiceManger(services),
+              Divider(),
+              Container(
+                padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[Text('Cerrar'), CloseButton()],
+                ),
+              ),
+            ],
+          ),
+        );
+  } 
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -38,38 +74,7 @@ class HomePage extends StatelessWidget {
             )
           ],
         ),
-        drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: ExactAssetImage('assets/lock.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                accountName: Text('Jordi'),
-                accountEmail: Text('jordividal1997@gmail.com'),
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Text(
-                    'J',
-                    style: TextStyle(fontSize: 29.0),
-                  ),
-                ),
-              ),
-              ServiceManger(services),
-              Divider(),
-              Container(
-                padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[Text('Cerrar'), CloseButton()],
-                ),
-              ),
-            ],
-          ),
-        ),
+        drawer: _drawerBuild(),
         body: AccountManger(accounts),
         floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
