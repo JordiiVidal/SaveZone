@@ -12,10 +12,8 @@ class Services extends StatelessWidget {
         _services[index].name,
         style: TextStyle(color: Colors.grey[600]),
       ),
-      trailing: Icon(
+      trailing: 
         _services[index].icon,
-        size: 19.0,
-      ),
     );
   }
 

@@ -11,79 +11,83 @@ class HomePage extends StatelessWidget {
 
   HomePage(this.accounts, this.services);
 
-  Widget _drawerBuild(){
+  Widget _drawerBuild() {
     return Drawer(
-          child: ListView(
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.white24,
-                  /*image: DecorationImage(
+      child: ListView(
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blueGrey,
+              /*image: DecorationImage(
                     image: ExactAssetImage('assets/lock.jpg'),
                     fit: BoxFit.cover,
                   ),*/
-                ),
-                accountName: Text('Jordi'),
-                accountEmail: Text('jordividal1997@gmail.com'),
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Text(
-                    'J',
-                    style: TextStyle(fontSize: 29.0),
-                  ),
-                ),
+            ),
+            accountName: Text('Jordi'),
+            accountEmail: Text('jordividal1997@gmail.com'),
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Text(
+                'J',
+                style: TextStyle(fontSize: 29.0),
               ),
-              ServiceManger(services),
-              Divider(),
-              Container(
-                padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[Text('Cerrar'), CloseButton()],
-                ),
-              ),
-            ],
+            ),
           ),
-        );
-  } 
+          ServiceManger(services),
+          Divider(),
+          Container(
+            color: Colors.blueGrey,
+            padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  'Cerrar',
+                  style: TextStyle(color: Colors.white),
+                ),
+                CloseButton()
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _fabBuild() {}
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return DefaultTabController(
-      //TAB TOP PAGE
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          elevation:
-              defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
-          backgroundColor: Colors.blueAccent,
-          textTheme:
-              TextTheme(title: TextStyle(color: Colors.white, fontSize: 20.0)),
-          title: Text('SAFE ZONE',
-              style: TextStyle(fontSize: 20.0, letterSpacing: 1.5)),
-          centerTitle: false,
-          actions: <Widget>[
-            IconButton(
-              icon: new Icon(Icons.star_border),
-              color: Colors.white,
-              iconSize: 24.0,
-              highlightColor: Colors.redAccent,
-              tooltip: 'block mobile',
-              onPressed: () {},
-            )
-          ],
-        ),
-        drawer: _drawerBuild(),
-        body: AccountManger(accounts),
-        floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
-            backgroundColor: Colors.blue,
-            onPressed: () {
-              Navigator.pushNamed(context, '/account');
-            }),
-        //bottomNavigationBar: TabBar(tabs: <Widget>[Tab(text: 'sdad',),Tab(text: 'sas',)],),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: defaultTargetPlatform == TargetPlatform.android ? 5.0 : 0.0,
+        backgroundColor: Colors.blueAccent,
+        textTheme:
+            TextTheme(title: TextStyle(color: Colors.white, fontSize: 20.0)),
+        title: Text('SAFE ZONE',
+            style: TextStyle(fontSize: 20.0, letterSpacing: 1.5)),
+        centerTitle: false,
+        actions: <Widget>[
+          IconButton(
+            icon: new Icon(Icons.star_border),
+            color: Colors.white,
+            iconSize: 24.0,
+            highlightColor: Colors.redAccent,
+            tooltip: 'block mobile',
+            onPressed: () {},
+          )
+        ],
       ),
+      drawer: _drawerBuild(),
+      body: AccountManger(accounts),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          backgroundColor: Colors.blue,
+          onPressed: () {
+            Navigator.pushNamed(context, '/service');
+          }),
+      //bottomNavigationBar: TabBar(tabs: <Widget>[Tab(text: 'sdad',),Tab(text: 'sas',)],),
     );
   }
 }

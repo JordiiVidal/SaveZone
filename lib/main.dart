@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'pages/homepage.dart';
 import 'pages/account_create.dart';
+import 'pages/service_create.dart';
 import 'models/account.dart';
 import 'models/service.dart';
 
@@ -19,11 +20,11 @@ class _MyAppState extends State<MyApp> {
 
   List<Account> _accounts = [];
   List<Service> _services = [
-    Service(name: 'Gmail', icon: Icons.email, colors: Colors.red),
-    Service(name: 'Facebook', icon: Icons.chat, colors: Colors.blue),
-    Service(name: 'Instagram', icon: Icons.photo_camera, colors: Colors.brown),
-    Service(name: 'Amazon', icon: Icons.shopping_cart, colors: Colors.yellow),
-    Service(name: 'Outlook', icon: Icons.email, colors: Colors.blue)
+    Service(name: 'Gmail', icon: Icon(Icons.email), colors: Colors.red),
+    Service(name: 'Facebook', icon: Icon(Icons.chat), colors: Colors.blue),
+    Service(name: 'Instagram', icon: Icon(Icons.photo_camera), colors: Colors.brown),
+    Service(name: 'Amazon', icon: Icon(Icons.shopping_cart), colors: Colors.yellow),
+    Service(name: 'Outlook', icon: Icon(Icons.email), colors: Colors.blue)
   ];
 
   void _addService(Service service) {
@@ -80,7 +81,12 @@ class _MyAppState extends State<MyApp> {
         if (pathElements[1] == 'account') {
           return MaterialPageRoute(
               builder: (BuildContext context) =>
-                  AccountCreatePage(_addAccount));
+                  AccountCreatePage(_addAccount,_services));
+        }
+        if (pathElements[1] == 'service') {
+          return MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  ServiceCreatePage(_addService));
         }
       },
       onUnknownRoute: (RouteSettings settings) {
