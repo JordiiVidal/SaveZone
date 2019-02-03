@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/account.dart';
 import '../models/service.dart';
 
 class ServiceCreatePage extends StatefulWidget {
+  
   final Function addService;
 
   ServiceCreatePage(this.addService);
@@ -15,23 +15,178 @@ class ServiceCreatePage extends StatefulWidget {
 }
 
 class _ServiceCreatePage extends State<ServiceCreatePage> {
-  String _service;
-  String _nameValue;
-  Icon _icon;
-  CircleAvatar _color;
-  List<Icon> icons = <Icon>[
-    const Icon(Icons.add_a_photo),
-    const Icon(Icons.dashboard),
-    const Icon(Icons.gamepad),
-  ];
-  List<CircleAvatar> colors = <CircleAvatar>[
-    const CircleAvatar(
-      backgroundColor: Colors.red,
-    ),
-    const CircleAvatar(
-      backgroundColor: Colors.blue,
-    )
-  ];
+  String _nameService;
+  IconData _icon;
+  int _color;
+
+  int getColorHexFromStr(String colorStr) {
+    colorStr = "FF" + colorStr;
+    colorStr = colorStr.replaceAll("#", "");
+    int val = 0;
+    int len = colorStr.length;
+    for (int i = 0; i < len; i++) {
+      int hexDigit = colorStr.codeUnitAt(i);
+      if (hexDigit >= 48 && hexDigit <= 57) {
+        val += (hexDigit - 48) * (1 << (4 * (len - 1 - i)));
+      } else if (hexDigit >= 65 && hexDigit <= 70) {
+        // A..F
+        val += (hexDigit - 55) * (1 << (4 * (len - 1 - i)));
+      } else if (hexDigit >= 97 && hexDigit <= 102) {
+        // a..f
+        val += (hexDigit - 87) * (1 << (4 * (len - 1 - i)));
+      } else {
+        throw new FormatException("An error occurred when converting a color");
+      }
+    }
+    return val;
+  }
+
+  Widget _iconBuild() {
+    return Container(
+      margin: EdgeInsets.all(10.0),
+      height: 50.0,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: <Widget>[
+          IconButton(
+            icon: Icon(Icons.chat),
+            padding: EdgeInsets.all(10.0),
+            onPressed: () {
+              setState(() {
+                _icon = Icons.chat;
+              });
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.email),
+            padding: EdgeInsets.all(10.0),
+            onPressed: () {
+              setState(() {
+                _icon = Icons.email;
+              });
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.videogame_asset),
+            padding: EdgeInsets.all(10.0),
+            onPressed: () {
+              setState(() {
+                _icon = Icons.videogame_asset;
+              });
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.camera),
+            padding: EdgeInsets.all(10.0),
+            onPressed: () {
+              setState(() {
+                _icon = Icons.camera;
+              });
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.shop),
+            padding: EdgeInsets.all(10.0),
+            onPressed: () {
+              setState(() {
+                _icon = Icons.shop;
+              });
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _colorBuild() {
+    return Container(
+      margin: EdgeInsets.all(10.0),
+      height: 40.0,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _color = getColorHexFromStr('#f7f7f7');
+              });
+            },
+            child: Container(
+              width: 40.0,
+              height: 40.0,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black,),
+                borderRadius: BorderRadius.circular(20.0),
+                color: Color(
+                  getColorHexFromStr('#f7f7f7'),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 10.0,
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _color = getColorHexFromStr('#9ebcf5');
+              });
+            },
+            child: Container(
+              width: 40.0,
+              height: 40.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: Color(
+                  getColorHexFromStr('#9ebcf5'),
+                ),
+              ),
+            ),    
+          ),
+          SizedBox(
+            width: 10.0,
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _color = getColorHexFromStr('#f59e9e');
+              });
+            },
+            child: Container(
+              width: 40.0,
+              height: 40.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: Color(
+                  getColorHexFromStr('#f59e9e'),
+                ),
+              ),
+            ),    
+          ),
+           SizedBox(
+            width: 10.0,
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _color = getColorHexFromStr('#a8f59e');
+              });
+            },
+            child: Container(
+              width: 40.0,
+              height: 40.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: Color(
+                  getColorHexFromStr('#a8f59e'),
+                ),
+              ),
+            ),    
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +199,42 @@ class _ServiceCreatePage extends State<ServiceCreatePage> {
         child: ListView(
           children: <Widget>[
             Container(
-              child: null,
-              height: 50.0,
               decoration: BoxDecoration(
-                image: new DecorationImage(
-                  image: new AssetImage("assets/lock.jpg"),
-                  fit: BoxFit.cover,
+                color: Color(
+                   _color == null ? getColorHexFromStr('#f7f7f7') : _color,
                 ),
+                border: Border(
+                  bottom: BorderSide(
+                    color: Color(
+                      getColorHexFromStr('#ededed'),
+                    ),
+                  ),
+                  left: BorderSide(
+                    color: Color(
+                      getColorHexFromStr('#ededed'),
+                    ),
+                  ),
+                  top: BorderSide(
+                    color: Color(
+                      getColorHexFromStr('#ededed'),
+                    ),
+                  ),
+                  right: BorderSide(
+                    color: Color(
+                      getColorHexFromStr('#ededed'),
+                    ),
+                  ),
+                ),
+              ),
+              margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
+              child: ListTile(
+                title: Text(
+                  _nameService == null ? 'Nombre' : _nameService,
+                ),
+                trailing: Icon(
+                  _icon == null ? Icons.phone_android : _icon,
+                ),
+                onTap: () => {},
               ),
             ),
             Container(
@@ -66,68 +250,45 @@ class _ServiceCreatePage extends State<ServiceCreatePage> {
                 ),
                 onChanged: (String value) {
                   setState(() {
-                    _nameValue = value;
+                    _nameService = value;
                   });
                 },
               ),
             ),
-            Container(
-              child: Row(
-                children: <Widget>[
-                  DropdownButton<Icon>(
-                    isDense: true,
-                    hint: Text('Seleccionar Icono'),
-                    items: icons.map((Icon icon) {
-                      return DropdownMenuItem<Icon>(
-                        value: icon,
-                        child: icon,
-                      );
-                    }).toList(),
-                    onChanged: (Icon icon) {
-                      setState(() {
-                        if (icon != _icon) {
-                          _icon = icon;
-                        }
-                      });
-                    },
-                    value: _icon == null ? null : _icon,
-                  ),
-                  DropdownButton<CircleAvatar>(
-                    isDense: true,
-                    onChanged: (CircleAvatar color) {
-                      setState(() {
-                        _color = color;
-                      });
-                    },
-                    hint: Text('Seleccionar Color'),
-                    value: _color == null ? null : _color,
-                    items: colors.map((CircleAvatar color) {
-                      return DropdownMenuItem<CircleAvatar>(
-                        value: color,
-                        child: color,
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text('ICONO'),
             ),
+            _iconBuild(),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text('COLOR'),
+            ),
+            _colorBuild(),
             SizedBox(
-              height: 10.0,
+              height: 40.0,
             ),
-            RaisedButton(
-              child: Text(
-                'SAVE',
-                style: TextStyle(color: Colors.white),
-              ),
-              color: Theme.of(context).accentColor,
-              onPressed: () {
-                final Service service = Service(
-                  name: _nameValue,
-                );
-                widget.addService(service);
-                Navigator.pop(context);
-              },
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                RaisedButton(
+                  child: Text(
+                    'SAVE',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Theme.of(context).accentColor,
+                  onPressed: () {
+                    final Service service = Service(
+                      name: _nameService,
+                      color: _color,
+                      icon: _icon
+                    );
+                    widget.addService(service);
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            )
           ],
         ),
       ),

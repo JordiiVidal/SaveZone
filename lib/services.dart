@@ -13,12 +13,13 @@ class Services extends StatelessWidget {
         style: TextStyle(color: Colors.grey[600]),
       ),
       trailing: 
-        _services[index].icon,
+        Icon(_services[index].icon),
     );
   }
 
   Widget _builServicesList() {
     Widget serviceCard = ListView.builder(
+      shrinkWrap: true,
       itemBuilder: _buildServiceItem,
       itemCount: _services.length,
     );

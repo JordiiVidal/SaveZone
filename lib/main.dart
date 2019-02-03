@@ -19,12 +19,33 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   List<Account> _accounts = [];
+  int getColorHexFromStr(String colorStr) {
+    colorStr = "FF" + colorStr;
+    colorStr = colorStr.replaceAll("#", "");
+    int val = 0;
+    int len = colorStr.length;
+    for (int i = 0; i < len; i++) {
+      int hexDigit = colorStr.codeUnitAt(i);
+      if (hexDigit >= 48 && hexDigit <= 57) {
+        val += (hexDigit - 48) * (1 << (4 * (len - 1 - i)));
+      } else if (hexDigit >= 65 && hexDigit <= 70) {
+        // A..F
+        val += (hexDigit - 55) * (1 << (4 * (len - 1 - i)));
+      } else if (hexDigit >= 97 && hexDigit <= 102) {
+        // a..f
+        val += (hexDigit - 87) * (1 << (4 * (len - 1 - i)));
+      } else {
+        throw new FormatException("An error occurred when converting a color");
+      }
+    }
+    return val;
+  }
   List<Service> _services = [
-    Service(name: 'Gmail', icon: Icon(Icons.email), colors: Colors.red),
-    Service(name: 'Facebook', icon: Icon(Icons.chat), colors: Colors.blue),
-    Service(name: 'Instagram', icon: Icon(Icons.photo_camera), colors: Colors.brown),
-    Service(name: 'Amazon', icon: Icon(Icons.shopping_cart), colors: Colors.yellow),
-    Service(name: 'Outlook', icon: Icon(Icons.email), colors: Colors.blue)
+    Service(name: 'Gmail', icon: Icons.email, color: 1),
+    Service(name: 'Facebook', icon: Icons.chat, color: 1),
+    Service(name: 'Instagram', icon: Icons.photo_camera, color: 1),
+    Service(name: 'Amazon', icon: Icons.shopping_cart, color: 1),
+    Service(name: 'Outlook', icon: Icons.email, color: 1)
   ];
 
   void _addService(Service service) {

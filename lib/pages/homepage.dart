@@ -18,10 +18,6 @@ class HomePage extends StatelessWidget {
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(
               color: Colors.blueGrey,
-              /*image: DecorationImage(
-                    image: ExactAssetImage('assets/lock.jpg'),
-                    fit: BoxFit.cover,
-                  ),*/
             ),
             accountName: Text('Jordi'),
             accountEmail: Text('jordividal1997@gmail.com'),
@@ -34,21 +30,6 @@ class HomePage extends StatelessWidget {
             ),
           ),
           ServiceManger(services),
-          Divider(),
-          Container(
-            color: Colors.blueGrey,
-            padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  'Cerrar',
-                  style: TextStyle(color: Colors.white),
-                ),
-                CloseButton()
-              ],
-            ),
-          ),
         ],
       ),
     );

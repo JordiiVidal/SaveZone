@@ -12,7 +12,6 @@ class ServiceManger extends StatelessWidget {
     return Container(
       alignment: Alignment.topCenter,
       child: Services(services),
-      height: 350.0,
     );
   }
 }
