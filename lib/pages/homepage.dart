@@ -4,6 +4,7 @@ import '../account_manager.dart';
 import '../service_manager.dart';
 import '../models/account.dart';
 import '../models/service.dart';
+import '../utils/fancyfab.dart';
 
 class HomePage extends StatelessWidget {
   final List<Account> accounts;
@@ -62,12 +63,7 @@ class HomePage extends StatelessWidget {
       ),
       drawer: _drawerBuild(),
       body: AccountManger(accounts),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          backgroundColor: Colors.blue,
-          onPressed: () {
-            Navigator.pushNamed(context, '/service');
-          }),
+      floatingActionButton:FancyFab(),
       //bottomNavigationBar: TabBar(tabs: <Widget>[Tab(text: 'sdad',),Tab(text: 'sas',)],),
     );
   }

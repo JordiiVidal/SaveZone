@@ -6,6 +6,20 @@ class Accounts extends StatelessWidget {
 
   Accounts(this._accounts);
 
+  void showSnackBar(BuildContext context, Account account) {
+    var snackBar = SnackBar(
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Text('Se ha eliminado la cuenta '+account.name),
+          Icon(Icons.email)
+        ],
+      ),
+    );
+
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
+
   Widget _buildAccountItem(BuildContext context, int index) {
     return Dismissible(
       key: Key(_accounts[index].name),
@@ -26,7 +40,8 @@ class Accounts extends StatelessWidget {
       ),
       onDismissed: (DismissDirection direction) {
         if (direction == DismissDirection.endToStart) {
-          print('secondary');
+          
+          showSnackBar(context,_accounts[index]);
         }
         if (direction == DismissDirection.startToEnd) {
           print('startend');
