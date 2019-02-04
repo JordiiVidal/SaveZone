@@ -36,8 +36,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _fabBuild() {}
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

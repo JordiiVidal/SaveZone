@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   List<Account> _accounts = [];
-  int getColorHexFromStr(String colorStr) {
+  static int getColorHexFromStr(String colorStr) {
     colorStr = "FF" + colorStr;
     colorStr = colorStr.replaceAll("#", "");
     int val = 0;
@@ -41,11 +41,11 @@ class _MyAppState extends State<MyApp> {
     return val;
   }
   List<Service> _services = [
-    Service(name: 'Gmail', icon: Icons.email, color: 1),
-    Service(name: 'Facebook', icon: Icons.chat, color: 1),
-    Service(name: 'Instagram', icon: Icons.photo_camera, color: 1),
-    Service(name: 'Amazon', icon: Icons.shopping_cart, color: 1),
-    Service(name: 'Outlook', icon: Icons.email, color: 1)
+    /*Service(name: 'Gmail', icon: Icons.email, color: getColorHexFromStr('#27851a')),
+    Service(name: 'Facebook', icon: Icons.chat, color: getColorHexFromStr('#27851a')),
+    Service(name: 'Instagram', icon: Icons.photo_camera, color: getColorHexFromStr('#27851a')),
+    Service(name: 'Amazon', icon: Icons.shopping_cart, color: getColorHexFromStr('#27851a')),
+    Service(name: 'Outlook', icon: Icons.email, color: getColorHexFromStr('#27851a'))*/
   ];
 
   void _addService(Service service) {

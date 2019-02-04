@@ -11,7 +11,7 @@ class Accounts extends StatelessWidget {
       content: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Text('Se ha eliminado la cuenta '+account.name),
+          Text('Se ha eliminado la cuenta '+account.userName),
           Icon(Icons.email)
         ],
       ),
@@ -22,7 +22,7 @@ class Accounts extends StatelessWidget {
 
   Widget _buildAccountItem(BuildContext context, int index) {
     return Dismissible(
-      key: Key(_accounts[index].name),
+      key: Key(_accounts[index].userName),
       background: Container(
         child: Icon(
           Icons.access_alarm,
@@ -53,11 +53,11 @@ class Accounts extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ListTile(
-            leading: Icon(Icons.storage),
-            title: Text(_accounts[index].name),
-            subtitle: Text(_accounts[index].email),
+            leading: Icon(_accounts[index].service.icon),
+            title: Text(_accounts[index].email),
+            subtitle: Text(_accounts[index].service.name),
             trailing: Text(
-              _accounts[index].name[0].toUpperCase(),
+              _accounts[index].service.name[0].toUpperCase(),
               style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w300),
             ),
           ),
