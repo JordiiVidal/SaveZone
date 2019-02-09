@@ -85,10 +85,13 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         primaryColor: defaultTargetPlatform == TargetPlatform.iOS
             ? Colors.grey[50]
-            : Colors.blueAccent,
+            : Color(getColorHexFromStr('#2d3436')),
         accentColor: defaultTargetPlatform == TargetPlatform.iOS
             ? Colors.grey[300]
-            : Colors.blue,
+            : Color(getColorHexFromStr('#b81132')),
+        primaryColorLight: Color(getColorHexFromStr('#efefef')),
+        primaryColorDark: Color(getColorHexFromStr('#121516')),
+        
         backgroundColor: Colors.white,
       ),
       routes: {

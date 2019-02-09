@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../models/service.dart';
 
 class ServiceCreatePage extends StatefulWidget {
-  
   final Function addService;
 
   ServiceCreatePage(this.addService);
@@ -13,7 +12,6 @@ class ServiceCreatePage extends StatefulWidget {
     return _ServiceCreatePage();
   }
 }
-
 
 class _ServiceCreatePage extends State<ServiceCreatePage> {
   String _nameService;
@@ -116,7 +114,9 @@ class _ServiceCreatePage extends State<ServiceCreatePage> {
               width: 40.0,
               height: 40.0,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black,),
+                border: Border.all(
+                  color: Colors.black,
+                ),
                 borderRadius: BorderRadius.circular(20.0),
                 color: Color(
                   getColorHexFromStr('#f7f7f7'),
@@ -142,7 +142,7 @@ class _ServiceCreatePage extends State<ServiceCreatePage> {
                   getColorHexFromStr('#9ebcf5'),
                 ),
               ),
-            ),    
+            ),
           ),
           SizedBox(
             width: 10.0,
@@ -162,9 +162,9 @@ class _ServiceCreatePage extends State<ServiceCreatePage> {
                   getColorHexFromStr('#f59e9e'),
                 ),
               ),
-            ),    
+            ),
           ),
-           SizedBox(
+          SizedBox(
             width: 10.0,
           ),
           GestureDetector(
@@ -182,7 +182,7 @@ class _ServiceCreatePage extends State<ServiceCreatePage> {
                   getColorHexFromStr('#a8f59e'),
                 ),
               ),
-            ),    
+            ),
           ),
         ],
       ),
@@ -193,6 +193,7 @@ class _ServiceCreatePage extends State<ServiceCreatePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColorLight,
       appBar: AppBar(
         title: Text('Create Service'),
       ),
@@ -201,30 +202,21 @@ class _ServiceCreatePage extends State<ServiceCreatePage> {
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
-                color: Color(
-                   _color == null ? getColorHexFromStr('#f7f7f7') : _color,
-                ),
+                color: _color == null
+                    ? Theme.of(context).accentColor
+                    : Color(_color),
                 border: Border(
                   bottom: BorderSide(
-                    color: Color(
-                      getColorHexFromStr('#ededed'),
-                    ),
+                    color: Theme.of(context).primaryColorLight, width: 1.0
                   ),
                   left: BorderSide(
-                    color: Color(
-                      getColorHexFromStr('#ededed'),
-                    ),
+                   color: Theme.of(context).primaryColorLight, width: 1.0
                   ),
                   top: BorderSide(
-                    color: Color(
-                      getColorHexFromStr('#ededed'),
-                    ),
+                    color: Theme.of(context).primaryColorLight, width: 1.0
                   ),
                   right: BorderSide(
-                    color: Color(
-                      getColorHexFromStr('#ededed'),
-                    ),
-                  ),
+                      color: Theme.of(context).accentColor, width: 8.0),
                 ),
               ),
               margin: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
@@ -273,17 +265,20 @@ class _ServiceCreatePage extends State<ServiceCreatePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 RaisedButton(
+                  padding: EdgeInsets.fromLTRB(50.0, 10.0, 50.0, 10.0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
                   child: Text(
-                    'SAVE',
-                    style: TextStyle(color: Colors.white),
+                    'Guardar',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17.0,
+                        letterSpacing: 1.0),
                   ),
                   color: Theme.of(context).accentColor,
                   onPressed: () {
-                    final Service service = Service(
-                      name: _nameService,
-                      color: _color,
-                      icon: _icon
-                    );
+                    final Service service =
+                        Service(name: _nameService, color: _color, icon: _icon);
                     widget.addService(service);
                     Navigator.pop(context);
                   },
