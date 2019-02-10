@@ -9,8 +9,9 @@ import '../pages/tabs/account_list.dart';
 class MainPage extends StatefulWidget {
   final List<Account> accounts;
   final List<Service> services;
+  final Function deleteAccount;
 
-  MainPage(this.accounts, this.services);
+  MainPage(this.accounts, this.services,this.deleteAccount);
 
   @override
   State<StatefulWidget> createState() {
@@ -157,7 +158,7 @@ class _MainPageState extends State<MainPage>
           controller: tabController,
           children: <Widget>[
             HomePage(widget.accounts, widget.services),
-            AccountList(widget.accounts),
+            AccountList(widget.accounts,widget.deleteAccount),
             ServiceList(widget.services),
           ],
         ),

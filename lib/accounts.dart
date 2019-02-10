@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'models/account.dart';
 
-class Accounts extends StatelessWidget {
+class Accounts extends StatefulWidget {
   final List<Account> _accounts;
+  final Function _deleteAccount;
 
-  Accounts(this._accounts);
+  Accounts(this._accounts, this._deleteAccount);
 
-  void showSnackBar(BuildContext context, Account account) {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return AccountsState();
+  }
+}
+
+class AccountsState extends State<Accounts> {
+  void showSnackBar(BuildContext context) {
     var snackBar = SnackBar(
       content: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Text('Se ha eliminado la cuenta '+account.userName),
+          Text('Se ha eliminado la cuenta'),
           Icon(Icons.email)
         ],
       ),
@@ -22,16 +31,17 @@ class Accounts extends StatelessWidget {
 
   Widget _buildAccountItem(BuildContext context, int index) {
     return Dismissible(
-      key: Key(_accounts[index].userName),
+      key: Key(widget._accounts[index].userName),
       background: Container(
+        color: Theme.of(context).accentColor,
         child: Icon(
-          Icons.access_alarm,
+          Icons.delete,
+          color: Colors.white,
         ),
-        color: Colors.blue,
         padding: EdgeInsets.only(right: 250.0),
       ),
       secondaryBackground: Container(
-        color: Colors.red,
+        color: Theme.of(context).accentColor,
         child: Icon(
           Icons.delete,
           color: Colors.white,
@@ -40,24 +50,30 @@ class Accounts extends StatelessWidget {
       ),
       onDismissed: (DismissDirection direction) {
         if (direction == DismissDirection.endToStart) {
-          
-          showSnackBar(context,_accounts[index]);
+          setState(() {
+            widget._deleteAccount(index);
+          });
+
+          Scaffold.of(context)
+              .showSnackBar(SnackBar(content: Text("dismissed")));
         }
         if (direction == DismissDirection.startToEnd) {
-          print('startend');
-        }
-        if (direction == DismissDirection.horizontal) {
-          print('horitzontal');
+          setState(() {
+            widget._deleteAccount(index);
+          });
+
+          Scaffold.of(context)
+              .showSnackBar(SnackBar(content: Text("dismissed")));
         }
       },
       child: Column(
         children: <Widget>[
           ListTile(
-            leading: Icon(_accounts[index].service.icon),
-            title: Text(_accounts[index].email),
-            subtitle: Text(_accounts[index].service.name),
+            leading: Icon(widget._accounts[index].service.icon),
+            title: Text(widget._accounts[index].email),
+            subtitle: Text(widget._accounts[index].service.name),
             trailing: Text(
-              _accounts[index].service.name[0].toUpperCase(),
+              widget._accounts[index].service.name[0].toUpperCase(),
               style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w300),
             ),
           ),
@@ -70,7 +86,7 @@ class Accounts extends StatelessWidget {
   Widget _buildAccountList() {
     Widget accountCard = ListView.builder(
       itemBuilder: _buildAccountItem,
-      itemCount: _accounts.length,
+      itemCount: widget._accounts.length,
     );
 
     return accountCard;

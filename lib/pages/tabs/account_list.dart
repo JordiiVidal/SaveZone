@@ -3,25 +3,18 @@ import '../../models/account.dart';
 import '../../account_manager.dart';
 
 
-class AccountList extends StatefulWidget{
+class AccountList extends StatelessWidget{
 
   final List<Account> accounts;
+  final Function deleteAccount;
 
 
-  AccountList(this.accounts);
+  AccountList(this.accounts,this.deleteAccount);
 
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return AccountListState();
-  }
-
-}
-
-class AccountListState extends State<AccountList>{
-  @override
+ @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return AccountManger(widget.accounts);
+    return  AccountManger(accounts,deleteAccount);
   }
+
 }

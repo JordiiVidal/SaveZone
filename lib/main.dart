@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Color(getColorHexFromStr('#b81132'))));
+        SystemUiOverlayStyle(statusBarColor: Colors.grey[400]),);
     // TODO: implement build
     return MaterialApp(
       title: 'SafeZone',
@@ -97,7 +97,7 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: Colors.white,
       ),
       routes: {
-        '/': (BuildContext context) => MainPage(_accounts, _services),
+        '/': (BuildContext context) => MainPage(_accounts, _services,_deleteAccount),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
@@ -117,12 +117,12 @@ class _MyAppState extends State<MyApp> {
         if (pathElements[1] == 'main') {
           return MaterialPageRoute(
               builder: (BuildContext context) =>
-                  MainPage(_accounts,_services));
+                  MainPage(_accounts,_services,_deleteAccount));
         }
       },
       onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute(
-            builder: (BuildContext context) => MainPage(_accounts, _services));
+            builder: (BuildContext context) => MainPage(_accounts, _services,_deleteAccount));
       },
     );
   }
