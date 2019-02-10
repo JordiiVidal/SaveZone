@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'pages/homepage.dart';
+import 'package:flutter/services.dart';
+import 'pages/mainpage.dart';
 import 'pages/account_create.dart';
 import 'pages/service_create.dart';
 import 'models/account.dart';
@@ -17,7 +18,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   List<Account> _accounts = [];
   static int getColorHexFromStr(String colorStr) {
     colorStr = "FF" + colorStr;
@@ -40,6 +40,7 @@ class _MyAppState extends State<MyApp> {
     }
     return val;
   }
+
   List<Service> _services = [
     /*Service(name: 'Gmail', icon: Icons.email, color: getColorHexFromStr('#27851a')),
     Service(name: 'Facebook', icon: Icons.chat, color: getColorHexFromStr('#27851a')),
@@ -78,6 +79,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Color(getColorHexFromStr('#b81132'))));
     // TODO: implement build
     return MaterialApp(
       title: 'SafeZone',
@@ -91,11 +94,10 @@ class _MyAppState extends State<MyApp> {
             : Color(getColorHexFromStr('#b81132')),
         primaryColorLight: Color(getColorHexFromStr('#efefef')),
         primaryColorDark: Color(getColorHexFromStr('#121516')),
-        
         backgroundColor: Colors.white,
       ),
       routes: {
-        '/': (BuildContext context) => HomePage(_accounts,_services),
+        '/': (BuildContext context) => MainPage(_accounts, _services),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
@@ -105,17 +107,22 @@ class _MyAppState extends State<MyApp> {
         if (pathElements[1] == 'account') {
           return MaterialPageRoute(
               builder: (BuildContext context) =>
-                  AccountCreatePage(_addAccount,_services));
+                  AccountCreatePage(_addAccount, _services));
         }
         if (pathElements[1] == 'service') {
           return MaterialPageRoute(
               builder: (BuildContext context) =>
                   ServiceCreatePage(_addService));
         }
+        if (pathElements[1] == 'main') {
+          return MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  MainPage(_accounts,_services));
+        }
       },
       onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute(
-            builder: (BuildContext context) => HomePage(_accounts,_services));
+            builder: (BuildContext context) => MainPage(_accounts, _services));
       },
     );
   }

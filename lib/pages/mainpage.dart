@@ -1,24 +1,39 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../account_manager.dart';
 import '../service_manager.dart';
 import '../models/account.dart';
 import '../models/service.dart';
+import '../pages/tabs/homepage.dart';
+import '../pages/tabs/service_list.dart';
+import '../pages/tabs/account_list.dart';
 
-class HomePage extends StatefulWidget {
+class MainPage extends StatefulWidget {
   final List<Account> accounts;
   final List<Service> services;
 
-  HomePage(this.accounts, this.services);
+  MainPage(this.accounts, this.services);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _HomePageState();
+    return _MainPageState();
   }
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainPageState extends State<MainPage>
+    with SingleTickerProviderStateMixin {
+  TabController tabController;
+
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
   Widget _drawerBuild(BuildContext context) {
     return Drawer(
       child: ListView(
@@ -33,10 +48,27 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _fab() {
+    return FloatingActionButton(
+      elevation: 2.0,
+      tooltip: 'Increment',
+      key: Key('_fabmain'),
+      onPressed: () {
+        tabController.animateTo(0);
+      },
+      child: Icon(
+        Icons.home,
+        size: 22.0,
+      ),
+      backgroundColor: Theme.of(context).accentColor,
+    );
+  }
+
   Widget _bottomNavigation(
       BuildContext context, GlobalKey<ScaffoldState> scaffold, double width) {
     double padding = width / 8;
     return BottomAppBar(
+      shape: CircularNotchedRectangle(),
       color: Theme.of(context).primaryColor,
       child: new Row(
         mainAxisSize: MainAxisSize.max,
@@ -50,16 +82,14 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   width: padding,
                 ),
-                Tab(
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      scaffold.currentState.openDrawer();
-                    },
+                IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: Colors.white,
                   ),
+                  onPressed: () {
+                    scaffold.currentState.openDrawer();
+                  },
                 ),
                 SizedBox(
                   width: padding,
@@ -70,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/account');
+                    tabController.animateTo(1);
                   },
                 ),
               ],
@@ -87,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/service');
+                    tabController.animateTo(2);
                   },
                 ),
                 SizedBox(
@@ -117,22 +147,21 @@ class _HomePageState extends State<HomePage> {
     double _width_50 = _widthDevice * 0.50;
 
     GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+
     // TODO: implement build
     return Scaffold(
         key: _scaffoldKey,
         backgroundColor: Theme.of(context).primaryColorLight,
         drawer: _drawerBuild(context),
-        body: AccountManger(widget.accounts),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/main');
-          },
-          child: Icon(
-            Icons.home,
-            size: 22.0,
-          ),
-          backgroundColor: Theme.of(context).accentColor,
+        body: TabBarView(
+          controller: tabController,
+          children: <Widget>[
+            HomePage(widget.accounts, widget.services),
+            AccountList(widget.accounts),
+            ServiceList(widget.services),
+          ],
         ),
+        floatingActionButton: _fab(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar:
             _bottomNavigation(context, _scaffoldKey, _width_50));
