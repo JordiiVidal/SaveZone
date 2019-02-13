@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../service_manager.dart';
 import '../models/account.dart';
 import '../models/service.dart';
 import '../pages/tabs/homepage.dart';
@@ -43,7 +42,6 @@ class _MainPageState extends State<MainPage>
             height: 100.0,
             color: Theme.of(context).primaryColor,
           ),
-          ServiceManger(widget.services),
         ],
       ),
     );
@@ -55,7 +53,7 @@ class _MainPageState extends State<MainPage>
       tooltip: 'Increment',
       key: Key('_fabmain'),
       onPressed: () {
-        tabController.animateTo(0);
+        tabController.animateTo(1);
       },
       child: Icon(
         Icons.home,
@@ -101,7 +99,7 @@ class _MainPageState extends State<MainPage>
                     color: Colors.white,
                   ),
                   onPressed: () {
-                    tabController.animateTo(1);
+                    tabController.animateTo(0);
                   },
                 ),
               ],
@@ -157,8 +155,8 @@ class _MainPageState extends State<MainPage>
         body: TabBarView(
           controller: tabController,
           children: <Widget>[
-            HomePage(widget.accounts, widget.services),
             AccountList(widget.accounts,widget.deleteAccount),
+            HomePage(widget.accounts, widget.services),
             ServiceList(widget.services),
           ],
         ),

@@ -28,15 +28,39 @@ class _AccountCreatePage extends State<AccountCreatePage> {
           _service = widget.services[index];
         });
       },
-      child: CircleAvatar(
-        radius: 28.0,
-        child: Text(
-          widget.services[index].name[0].toUpperCase(),
-          style: TextStyle(
-              fontSize: 25.0, color: Colors.white, fontWeight: FontWeight.w300),
+        child: Container(
+          width: 100.0,
+          decoration: BoxDecoration(
+            border: Border.all(color:Colors.grey[300],width: 2.0),
+            borderRadius: BorderRadius.circular(10.0)
+          ),
+          color: Colors.red,
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 10.0,
+              ),
+              CircleAvatar(
+                radius: 28.0,
+                child: Text(
+                  widget.services[index].name[0].toUpperCase(),
+                  style: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w300),
+                ),
+                backgroundColor: Color(widget.services[index].color),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),Text(
+                  widget.services[index].name,
+                  style: TextStyle(fontSize: 15.0),
+                ),
+            
+            ],
+          ),
         ),
-        backgroundColor: Color(widget.services[index].color),
-      ),
     );
   }
 
@@ -95,7 +119,7 @@ class _AccountCreatePage extends State<AccountCreatePage> {
                         image: new AssetImage("assets/lock.jpg"),
                         fit: BoxFit.cover,
                         colorFilter: new ColorFilter.mode(
-                            Colors.black.withOpacity(0.5), BlendMode.dstATop),
+                            Colors.black.withOpacity(0.8), BlendMode.dstATop),
                       ),
                     ),
                   ),
@@ -137,12 +161,13 @@ class _AccountCreatePage extends State<AccountCreatePage> {
                 padding: EdgeInsets.all(10.0),
               ),
               Container(
-                margin: EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey[300]),
-                  borderRadius: BorderRadius.circular(10.0),
+                  border: BorderDirectional(
+                    top: BorderSide(color:Colors.grey[300],width: 2.0),
+                    bottom: BorderSide(color: Colors.grey[300],width: 2.0)
+                  ),
                 ),
-                height: 100.0,
+                height: 120.0,
                 padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
                 child: widget.services.length == 0
                     ? _btnAddService()

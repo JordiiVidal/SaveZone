@@ -33,7 +33,7 @@ class AccountsState extends State<Accounts> {
     return Dismissible(
       key: Key(widget._accounts[index].userName),
       background: Container(
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).indicatorColor,
         child: Icon(
           Icons.delete,
           color: Colors.white,
@@ -41,7 +41,7 @@ class AccountsState extends State<Accounts> {
         padding: EdgeInsets.only(right: 250.0),
       ),
       secondaryBackground: Container(
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).indicatorColor,
         child: Icon(
           Icons.delete,
           color: Colors.white,
@@ -66,19 +66,19 @@ class AccountsState extends State<Accounts> {
               .showSnackBar(SnackBar(content: Text("dismissed")));
         }
       },
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            leading: Icon(widget._accounts[index].service.icon),
-            title: Text(widget._accounts[index].email),
-            subtitle: Text(widget._accounts[index].service.name),
-            trailing: Text(
-              widget._accounts[index].service.name[0].toUpperCase(),
-              style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w300),
-            ),
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(color: Theme.of(context).accentColor),
+            borderRadius: BorderRadius.circular(2.0)),
+        child: ListTile(
+          leading: Icon(widget._accounts[index].service.icon),
+          title: Text(widget._accounts[index].email),
+          subtitle: Text(widget._accounts[index].service.name),
+          trailing: Text(
+            widget._accounts[index].service.name[0].toUpperCase(),
+            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w300),
           ),
-          Divider(),
-        ],
+        ),
       ),
     );
   }

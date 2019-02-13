@@ -79,19 +79,22 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.grey[400]),);
+    if(defaultTargetPlatform == TargetPlatform.android){
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Color(getColorHexFromStr('#2d3436'))),);
+    }
     // TODO: implement build
     return MaterialApp(
       title: 'SafeZone',
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: defaultTargetPlatform == TargetPlatform.iOS
-            ? Colors.grey[50]
+            ? Colors.grey[850]
             : Color(getColorHexFromStr('#2d3436')),
         accentColor: defaultTargetPlatform == TargetPlatform.iOS
             ? Colors.grey[300]
             : Color(getColorHexFromStr('#b81132')),
+        indicatorColor: Color(getColorHexFromStr('#b81132')),
         primaryColorLight: Color(getColorHexFromStr('#efefef')),
         primaryColorDark: Color(getColorHexFromStr('#121516')),
         backgroundColor: Colors.white,

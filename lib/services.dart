@@ -7,13 +7,20 @@ class Services extends StatelessWidget {
   Services(this._services);
 
   Widget _buildServiceItem(BuildContext context, int index) {
-    return ListTile(
-      title: Text(
-        _services[index].name,
-        style: TextStyle(color: Colors.grey[600]),
+    return Container(
+      margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+      decoration: BoxDecoration(
+        border: BorderDirectional(
+            bottom:
+                BorderSide(color: Theme.of(context).accentColor, width: 1.0)),
       ),
-      trailing: 
-        Icon(_services[index].icon),
+      child: ListTile(
+        title: Text(
+          _services[index].name,
+          style: TextStyle(color: Colors.grey[600]),
+        ),
+        trailing: Icon(_services[index].icon),
+      ),
     );
   }
 
