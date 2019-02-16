@@ -1,5 +1,11 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'models/account.dart';
+import 'models/accountJSON.dart';
+import 'models/serviceJSON.dart';
 
 class Accounts extends StatefulWidget {
   final List<Account> _accounts;
@@ -15,6 +21,11 @@ class Accounts extends StatefulWidget {
 }
 
 class AccountsState extends State<Accounts> {
+  void initState() {
+    super.initState();
+    _loadAccounts();
+  }
+
   void showSnackBar(BuildContext context) {
     var snackBar = SnackBar(
       content: Row(
@@ -29,64 +40,95 @@ class AccountsState extends State<Accounts> {
     Scaffold.of(context).showSnackBar(snackBar);
   }
 
-  Widget _buildAccountItem(BuildContext context, int index) {
-    return Dismissible(
-      key: Key(widget._accounts[index].userName),
-      background: Container(
-        color: Theme.of(context).indicatorColor,
-        child: Icon(
-          Icons.delete,
-          color: Colors.white,
-        ),
-        padding: EdgeInsets.only(right: 250.0),
-      ),
-      secondaryBackground: Container(
-        color: Theme.of(context).indicatorColor,
-        child: Icon(
-          Icons.delete,
-          color: Colors.white,
-        ),
-        padding: EdgeInsets.only(left: 250.0),
-      ),
-      onDismissed: (DismissDirection direction) {
-        if (direction == DismissDirection.endToStart) {
-          setState(() {
-            widget._deleteAccount(index);
-          });
+  Future<String> _loadAccountAsset() async {
+    return await rootBundle.loadString('assets/data/accounts.json');
+  }
 
-          Scaffold.of(context)
-              .showSnackBar(SnackBar(content: Text("dismissed")));
-        }
-        if (direction == DismissDirection.startToEnd) {
-          setState(() {
-            widget._deleteAccount(index);
-          });
+  Future<List<Account>> _loadAccounts() async {
+    String jsonString = await _loadAccountAsset();
+    print(jsonString);
+    final jsonRespone = json.decode(jsonString);
+    print(jsonRespone);
+    List<Account> accounts = [];
 
-          Scaffold.of(context)
-              .showSnackBar(SnackBar(content: Text("dismissed")));
-        }
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[300]),
-            borderRadius: BorderRadius.circular(2.0)),
-        child: ListTile(
-          leading: Icon(Icons.local_activity),// Icon(widget._accounts[index].service.icon)
-          title: Text(widget._accounts[index].email),
-          subtitle: Text(widget._accounts[index].service.name),
-          trailing: Text(
-            widget._accounts[index].service.name[0].toUpperCase(),
-            style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w300),
-          ),
-        ),
-      ),
-    );
+    for (var a in jsonRespone) {
+      Account accountJSON = Account.fromJson(a);
+      accounts.add(accountJSON);
+    }
+
+    return accounts;
   }
 
   Widget _buildAccountList() {
-    Widget accountCard = ListView.builder(
-      itemBuilder: _buildAccountItem,
-      itemCount: widget._accounts.length,
+    Widget accountCard = FutureBuilder(
+      future: _loadAccounts(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.data == null) {
+          return Container(
+              child: Center(
+            child: Text('Loading ...'),
+          ));
+        } else {
+          return ListView.builder(
+            itemBuilder: (BuildContext context, int index) {
+              return Dismissible(
+                key: Key(snapshot.data[index].userName),
+                background: Container(
+                  color: Theme.of(context).indicatorColor,
+                  child: Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
+                  padding: EdgeInsets.only(right: 250.0),
+                ),
+                secondaryBackground: Container(
+                  color: Theme.of(context).indicatorColor,
+                  child: Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
+                  padding: EdgeInsets.only(left: 250.0),
+                ),
+                onDismissed: (DismissDirection direction) {
+                  if (direction == DismissDirection.endToStart) {
+                    setState(() {
+                      widget._deleteAccount(index);
+                    });
+
+                    Scaffold.of(context)
+                        .showSnackBar(SnackBar(content: Text("dismissed")));
+                  }
+                  if (direction == DismissDirection.startToEnd) {
+                    setState(() {
+                      widget._deleteAccount(index);
+                    });
+
+                    Scaffold.of(context)
+                        .showSnackBar(SnackBar(content: Text("dismissed")));
+                  }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey[300]),
+                      borderRadius: BorderRadius.circular(2.0)),
+                  child: ListTile(
+                    leading: Icon(Icons
+                        .local_activity), // Icon(widget._accounts[index].service.icon)
+                    title: Text(snapshot.data[index].email),
+                    subtitle: Text(snapshot.data[index].service.name),
+                    trailing: Text(
+                      snapshot.data[index].service.name[0].toUpperCase(),
+                      style: TextStyle(
+                          fontSize: 22.0, fontWeight: FontWeight.w300),
+                    ),
+                  ),
+                ),
+              );
+            },
+            itemCount: snapshot.data.length,
+          );
+        }
+      },
     );
 
     return accountCard;
@@ -94,7 +136,6 @@ class AccountsState extends State<Accounts> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return _buildAccountList();
   }
 }

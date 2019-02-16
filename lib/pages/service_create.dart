@@ -278,7 +278,7 @@ class _ServiceCreatePage extends State<ServiceCreatePage> {
                   color: Theme.of(context).accentColor,
                   onPressed: () {
                     final Service service =
-                        Service(name: _nameService, color: _color, icon: _icon);
+                        Service(name: _nameService, color: '#000', icon: 1);
                     widget.addService(service);
                     Navigator.pop(context);
                   },

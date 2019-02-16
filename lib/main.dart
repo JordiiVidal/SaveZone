@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -41,9 +44,8 @@ class _MyAppState extends State<MyApp> {
     return val;
   }
 
-  void _getData(){
-    
-  }
+
+
   List<Service> _services = [
     /*Service(name: 'Gmail', icon: Icons.email, color: getColorHexFromStr('#27851a')),
     Service(name: 'Facebook', icon: Icons.chat, color: getColorHexFromStr('#27851a')),
@@ -82,9 +84,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    if(defaultTargetPlatform == TargetPlatform.android){
+    if (defaultTargetPlatform == TargetPlatform.android) {
       SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Color(getColorHexFromStr('#2d3436'))),);
+        SystemUiOverlayStyle(
+            statusBarColor: Color(getColorHexFromStr('#2d3436'))),
+      );
     }
     // TODO: implement build
     return MaterialApp(
@@ -103,7 +107,8 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: Colors.white,
       ),
       routes: {
-        '/': (BuildContext context) => MainPage(_accounts, _services,_deleteAccount),
+        '/': (BuildContext context) =>
+            MainPage(_accounts, _services, _deleteAccount),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
@@ -123,12 +128,13 @@ class _MyAppState extends State<MyApp> {
         if (pathElements[1] == 'main') {
           return MaterialPageRoute(
               builder: (BuildContext context) =>
-                  MainPage(_accounts,_services,_deleteAccount));
+                  MainPage(_accounts, _services, _deleteAccount));
         }
       },
       onUnknownRoute: (RouteSettings settings) {
         return MaterialPageRoute(
-            builder: (BuildContext context) => MainPage(_accounts, _services,_deleteAccount));
+            builder: (BuildContext context) =>
+                MainPage(_accounts, _services, _deleteAccount));
       },
     );
   }

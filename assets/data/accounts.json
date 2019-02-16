@@ -1,0 +1,32 @@
+[
+    {
+        "email": "jordividal1997@gmail.com",
+        "userName": "jordi",
+        "password": "1234",
+        "service": {
+            "name": "Email",
+            "icon": 2,
+            "color": "#000000"
+        }
+    },
+    {
+        "email": "jordividal19972@gmail.com",
+        "userName": "jordi",
+        "password": "1234",
+        "service": {
+            "name": "Email",
+            "icon": 2,
+            "color": "#000000"
+        }
+    },
+    {
+        "email": "jordividal1997@gmail.com",
+        "userName": "jordi",
+        "password": "1234",
+        "service": {
+            "name": "Email",
+            "icon": 2,
+            "color": "#000000"
+        }
+    }
+]

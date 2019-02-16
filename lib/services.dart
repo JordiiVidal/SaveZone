@@ -19,7 +19,7 @@ class Services extends StatelessWidget {
           _services[index].name,
           style: TextStyle(color: Colors.grey[600]),
         ),
-        trailing: Icon(_services[index].icon),
+        trailing: Icon(Icons.email),//_services[index].icon
       ),
     );
   }

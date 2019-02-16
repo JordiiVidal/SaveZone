@@ -10,4 +10,12 @@ class Account{
 
   Account({ @required this.email, @required this.userName, @required this.password, @required this.service});
 
+  factory Account.fromJson(Map<String, dynamic> parsedJson){
+    return Account(
+      email: parsedJson['email'],
+      userName : parsedJson['userName'],
+      password : parsedJson ['password'],
+      service :Service.fromJson(parsedJson['service']),
+    );
+  }
 }

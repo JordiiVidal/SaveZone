@@ -50,7 +50,7 @@ class _AccountCreatePage extends State<AccountCreatePage> {
                     color: Colors.white,
                     fontWeight: FontWeight.w300),
               ),
-              backgroundColor: Color(widget.services[index].color),
+              backgroundColor: Colors.red,//color
             ),
             SizedBox(
               height: 10.0,

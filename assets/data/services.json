@@ -1,12 +1,12 @@
 [
     {
         "name": "Facebook",
-        "icon": "Icons.red",
+        "icon": 1,
         "color": "#000000"
     },
     {
         "name": "Email",
-        "icon": "Icons.red",
+        "icon": 2,
         "color": "#000000"
     }
 ]
