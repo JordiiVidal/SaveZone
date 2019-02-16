@@ -15,21 +15,22 @@ class HomePage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.all(20.0),
-            decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(color: Colors.grey[300])),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                CircleAvatar(
-                  backgroundColor: Colors.red,
-                ),
-                Center(child: Text('sasa'),),
-                Text('45')
-              ],
+            color: Theme.of(context).primaryColor,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('SAFEZONE',style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 21.0,
+                  ),)
+                ],
+              ),
             ),
+            height: 44.0,
+          ),
+          Expanded(
+            child: Center(child:Text('HOME PAGE')),
           ),
         ],
       ),

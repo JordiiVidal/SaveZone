@@ -28,11 +28,11 @@ class AccountList extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
                 child: Column(children: <Widget>[
                   SizedBox(
-                    height: 40.0,
+                    height: 20.0,
                   ),
                   Container(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         FloatingActionButton.extended(
                           heroTag: Key('_fabAccount2'),

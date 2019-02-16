@@ -12,7 +12,7 @@ class Services extends StatelessWidget {
       decoration: BoxDecoration(
         border: BorderDirectional(
             bottom:
-                BorderSide(color: Theme.of(context).accentColor, width: 1.0)),
+                BorderSide(color: Colors.grey[300], width: 1.0)),
       ),
       child: ListTile(
         title: Text(

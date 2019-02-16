@@ -41,6 +41,9 @@ class _MyAppState extends State<MyApp> {
     return val;
   }
 
+  void _getData(){
+    
+  }
   List<Service> _services = [
     /*Service(name: 'Gmail', icon: Icons.email, color: getColorHexFromStr('#27851a')),
     Service(name: 'Facebook', icon: Icons.chat, color: getColorHexFromStr('#27851a')),

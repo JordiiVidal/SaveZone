@@ -68,10 +68,10 @@ class AccountsState extends State<Accounts> {
       },
       child: Container(
         decoration: BoxDecoration(
-            border: Border.all(color: Theme.of(context).accentColor),
+            border: Border.all(color: Colors.grey[300]),
             borderRadius: BorderRadius.circular(2.0)),
         child: ListTile(
-          leading: Icon(widget._accounts[index].service.icon),
+          leading: Icon(Icons.local_activity),// Icon(widget._accounts[index].service.icon)
           title: Text(widget._accounts[index].email),
           subtitle: Text(widget._accounts[index].service.name),
           trailing: Text(

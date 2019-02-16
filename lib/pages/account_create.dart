@@ -25,42 +25,43 @@ class _AccountCreatePage extends State<AccountCreatePage> {
     return GestureDetector(
       onTap: () {
         setState(() {
+          print('service');
           _service = widget.services[index];
         });
       },
-        child: Container(
-          width: 100.0,
-          decoration: BoxDecoration(
-            border: Border.all(color:Colors.grey[300],width: 2.0),
-            borderRadius: BorderRadius.circular(10.0)
-          ),
+      child: Container(
+        width: 100.0,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey[300], width: 2.0),
+          borderRadius: BorderRadius.circular(10.0),
           color: Colors.red,
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 10.0,
-              ),
-              CircleAvatar(
-                radius: 28.0,
-                child: Text(
-                  widget.services[index].name[0].toUpperCase(),
-                  style: TextStyle(
-                      fontSize: 25.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w300),
-                ),
-                backgroundColor: Color(widget.services[index].color),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),Text(
-                  widget.services[index].name,
-                  style: TextStyle(fontSize: 15.0),
-                ),
-            
-            ],
-          ),
         ),
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 10.0,
+            ),
+            CircleAvatar(
+              radius: 28.0,
+              child: Text(
+                widget.services[index].name[0].toUpperCase(),
+                style: TextStyle(
+                    fontSize: 25.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300),
+              ),
+              backgroundColor: Color(widget.services[index].color),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Text(
+              widget.services[index].name,
+              style: TextStyle(fontSize: 15.0),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -163,9 +164,8 @@ class _AccountCreatePage extends State<AccountCreatePage> {
               Container(
                 decoration: BoxDecoration(
                   border: BorderDirectional(
-                    top: BorderSide(color:Colors.grey[300],width: 2.0),
-                    bottom: BorderSide(color: Colors.grey[300],width: 2.0)
-                  ),
+                      top: BorderSide(color: Colors.grey[300], width: 2.0),
+                      bottom: BorderSide(color: Colors.grey[300], width: 2.0)),
                 ),
                 height: 120.0,
                 padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
@@ -182,7 +182,7 @@ class _AccountCreatePage extends State<AccountCreatePage> {
                       letterSpacing: 0.5,
                       color: Colors.black),
                   decoration: InputDecoration(
-                    labelText: 'Account Name',
+                    labelText: 'User Name',
                   ),
                   onChanged: (String value) {
                     setState(() {
