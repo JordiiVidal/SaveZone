@@ -18,4 +18,15 @@ class Account{
       service :Service.fromJson(parsedJson['service']),
     );
   }
+  toJson(){
+
+    Map<String, dynamic> serviceJosn = <String, dynamic>{
+      "email":this.email,
+      "userName":this.userName,
+      "password":this.password,
+      "service":this.service
+    };
+
+    return serviceJosn;
+  }
 }

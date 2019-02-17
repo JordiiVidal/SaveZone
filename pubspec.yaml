@@ -1,4 +1,4 @@
-name: savezone
+name: SafeZone
 description: A new Flutter project.
 
 dependencies:
@@ -12,6 +12,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  path_provider: ^0.5.0+1    
 
 
 # For information on the generic Dart part of this file, see the

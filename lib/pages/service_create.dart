@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import '../models/service.dart';
+import 'dart:io';
+import 'dart:convert';
+import 'package:path_provider/path_provider.dart';
+import '../tools/colors.dart';
+import '../tools/lists.dart';
 
 class ServiceCreatePage extends StatefulWidget {
   final Function addService;
@@ -14,85 +19,77 @@ class ServiceCreatePage extends StatefulWidget {
 }
 
 class _ServiceCreatePage extends State<ServiceCreatePage> {
+  File jsonFile;
+  Directory dir;
+  String filename = "safezone.json";
+  bool fileExists = false;
+  Map<String, dynamic> fileContent;
   String _nameService;
   IconData _icon;
+  int indexIcon;
   int _color;
+  List<IconData> _icons = [];
 
-  int getColorHexFromStr(String colorStr) {
-    colorStr = "FF" + colorStr;
-    colorStr = colorStr.replaceAll("#", "");
-    int val = 0;
-    int len = colorStr.length;
-    for (int i = 0; i < len; i++) {
-      int hexDigit = colorStr.codeUnitAt(i);
-      if (hexDigit >= 48 && hexDigit <= 57) {
-        val += (hexDigit - 48) * (1 << (4 * (len - 1 - i)));
-      } else if (hexDigit >= 65 && hexDigit <= 70) {
-        // A..F
-        val += (hexDigit - 55) * (1 << (4 * (len - 1 - i)));
-      } else if (hexDigit >= 97 && hexDigit <= 102) {
-        // a..f
-        val += (hexDigit - 87) * (1 << (4 * (len - 1 - i)));
-      } else {
-        throw new FormatException("An error occurred when converting a color");
-      }
+  @override
+  void initState() {
+    super.initState();
+    getApplicationDocumentsDirectory().then((Directory directory) {
+      dir = directory;
+      jsonFile = File(dir.path + "/" + filename);
+      fileExists = jsonFile.existsSync();
+    });
+    _icons = iconlist();
+  }
+
+  File createFile(
+      Map<String, dynamic> content, Directory dir, String filename) {
+    //print('create');
+    File file = File(dir.path + "/" + filename);
+    file.createSync();
+    fileExists = true;
+    file.writeAsStringSync(json.encode(content));
+    return file;
+  }
+
+  void writeToFile(String key, Service service) {
+    //print('write');
+    Map<String, dynamic> content = {key: json.encode(service.toJson())};
+    if (fileExists) {
+      print('file exists');
+      Map<String, dynamic> jsonFileContent =
+          json.decode(jsonFile.readAsStringSync());
+      jsonFileContent.addAll(content);
+      jsonFile.writeAsStringSync(json.encode(jsonFileContent));
+    } else {
+      //print('File not exists');
+      createFile(content, dir, filename);
     }
-    return val;
+    setState(() {
+      fileContent = json.decode(jsonFile.readAsStringSync());
+    });
+  }
+
+  Widget _iconItem(BuildContext context, int index){
+    return IconButton(
+            icon: Icon(_icons[index]),
+            padding: EdgeInsets.all(10.0),
+            onPressed: () {
+              setState(() {
+                _icon = _icons[index];
+                indexIcon = index;
+              });
+            },
+          );
   }
 
   Widget _iconBuild() {
     return Container(
       margin: EdgeInsets.all(10.0),
       height: 50.0,
-      child: ListView(
+      child: ListView.builder( 
         scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          IconButton(
-            icon: Icon(Icons.chat),
-            padding: EdgeInsets.all(10.0),
-            onPressed: () {
-              setState(() {
-                _icon = Icons.chat;
-              });
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.email),
-            padding: EdgeInsets.all(10.0),
-            onPressed: () {
-              setState(() {
-                _icon = Icons.email;
-              });
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.videogame_asset),
-            padding: EdgeInsets.all(10.0),
-            onPressed: () {
-              setState(() {
-                _icon = Icons.videogame_asset;
-              });
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.camera),
-            padding: EdgeInsets.all(10.0),
-            onPressed: () {
-              setState(() {
-                _icon = Icons.camera;
-              });
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.shop),
-            padding: EdgeInsets.all(10.0),
-            onPressed: () {
-              setState(() {
-                _icon = Icons.shop;
-              });
-            },
-          )
-        ],
+        itemBuilder: _iconItem,
+        itemCount: _icons.length,
       ),
     );
   }
@@ -207,14 +204,11 @@ class _ServiceCreatePage extends State<ServiceCreatePage> {
                     : Color(_color),
                 border: Border(
                   bottom: BorderSide(
-                    color: Theme.of(context).primaryColorLight, width: 1.0
-                  ),
+                      color: Theme.of(context).primaryColorLight, width: 1.0),
                   left: BorderSide(
-                   color: Theme.of(context).primaryColorLight, width: 1.0
-                  ),
+                      color: Theme.of(context).primaryColorLight, width: 1.0),
                   top: BorderSide(
-                    color: Theme.of(context).primaryColorLight, width: 1.0
-                  ),
+                      color: Theme.of(context).primaryColorLight, width: 1.0),
                   right: BorderSide(
                       color: Theme.of(context).accentColor, width: 8.0),
                 ),
@@ -278,8 +272,8 @@ class _ServiceCreatePage extends State<ServiceCreatePage> {
                   color: Theme.of(context).accentColor,
                   onPressed: () {
                     final Service service =
-                        Service(name: _nameService, color: '#000', icon: 1);
-                    widget.addService(service);
+                        Service(name: _nameService, color: '#000', icon: indexIcon);
+                    writeToFile(service.name, service);
                     Navigator.pop(context);
                   },
                 ),

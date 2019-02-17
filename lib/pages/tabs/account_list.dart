@@ -12,14 +12,26 @@ class AccountList extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return _accounts.length <= 0
-        ? Center(
-            child: FloatingActionButton.extended(
-              heroTag: Key('_fabAccount1'),
-              icon: Icon(Icons.add),
-              label: Text('Añadir Cuenta'),
-              onPressed: () {
-                Navigator.pushNamed(context, '/account');
-              },
+        ? SafeArea(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  color: Theme.of(context).primaryColor,
+                  height: 44.0,
+                ),
+                Expanded(
+                  child: Center(
+                    child: FloatingActionButton.extended(
+                      heroTag: Key('_fabAccount1'),
+                      icon: Icon(Icons.add),
+                      label: Text('Añadir Cuenta'),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/account');
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
           )
         : Column(
@@ -50,8 +62,8 @@ class AccountList extends StatelessWidget {
                 ]),
               ),
               SizedBox(
-                    height: 10.0,
-                  ),
+                height: 10.0,
+              ),
               Expanded(
                 child: Accounts(_accounts, _deleteAccount),
               )

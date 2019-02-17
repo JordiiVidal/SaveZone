@@ -34,6 +34,20 @@ class _MainPageState extends State<MainPage>
     super.dispose();
   }
 
+   void showSnackBar(BuildContext context) {
+    var snackBar = SnackBar(
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Text('Se ha eliminado la cuenta'),
+          Icon(Icons.email)
+        ],
+      ),
+    );
+
+    Scaffold.of(context).showSnackBar(snackBar);
+  }
+
   Widget _drawerBuild(BuildContext context) {
     return Drawer(
       child: ListView(

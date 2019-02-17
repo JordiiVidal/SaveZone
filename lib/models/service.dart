@@ -15,4 +15,15 @@ class Service{
       color : parsedJson ['color']
     );
   }
+
+  toJson(){
+
+    Map<String, dynamic> serviceJosn = <String, dynamic>{
+      "name":this.name,
+      "icon":this.icon,
+      "color":this.color,
+    };
+
+    return serviceJosn;
+  }
 }

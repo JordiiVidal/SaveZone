@@ -4,8 +4,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'models/account.dart';
-import 'models/accountJSON.dart';
-import 'models/serviceJSON.dart';
 
 class Accounts extends StatefulWidget {
   final List<Account> _accounts;
@@ -21,24 +19,12 @@ class Accounts extends StatefulWidget {
 }
 
 class AccountsState extends State<Accounts> {
+  
   void initState() {
     super.initState();
     _loadAccounts();
   }
 
-  void showSnackBar(BuildContext context) {
-    var snackBar = SnackBar(
-      content: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          Text('Se ha eliminado la cuenta'),
-          Icon(Icons.email)
-        ],
-      ),
-    );
-
-    Scaffold.of(context).showSnackBar(snackBar);
-  }
 
   Future<String> _loadAccountAsset() async {
     return await rootBundle.loadString('assets/data/accounts.json');
