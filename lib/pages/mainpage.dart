@@ -26,6 +26,7 @@ class _MainPageState extends State<MainPage>
   void initState() {
     super.initState();
     tabController = TabController(length: 3, vsync: this);
+    tabController.animateTo(1);
   }
 
   @override

@@ -21,7 +21,7 @@ class ServiceCreatePage extends StatefulWidget {
 class _ServiceCreatePage extends State<ServiceCreatePage> {
   File jsonFile;
   Directory dir;
-  String filename = "safezone.json";
+  String filename = "services.json";
   bool fileExists = false;
   Map<String, dynamic> fileContent;
   String _nameService;

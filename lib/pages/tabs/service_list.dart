@@ -20,7 +20,7 @@ class ServiceList extends StatefulWidget {
 class ServiceListState extends State<ServiceList> {
   File jsonFile;
   Directory dir;
-  String filename = "safezone.json";
+  String filename = "services.json";
   bool fileExists = false;
   Map<String, dynamic> fileContent;
   List<Service> _services = [];
